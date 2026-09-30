@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Edge10 SDK docs builder">
+<title>5. VPC 预处理 — Edge10 SDK 文档</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343131'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='bold' text-anchor='middle' fill='%232980b9' font-family='Arial'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #177500 } /* Comment */
+.highlight .err { color: #000 } /* Error */
+.highlight .k { color: #A90D91 } /* Keyword */
+.highlight .l { color: #1C01CE } /* Literal */
+.highlight .n { color: #000 } /* Name */
+.highlight .o { color: #000 } /* Operator */
+.highlight .ch { color: #177500 } /* Comment.Hashbang */
+.highlight .cm { color: #177500 } /* Comment.Multiline */
+.highlight .cp { color: #633820 } /* Comment.Preproc */
+.highlight .cpf { color: #177500 } /* Comment.PreprocFile */
+.highlight .c1 { color: #177500 } /* Comment.Single */
+.highlight .cs { color: #177500 } /* Comment.Special */
+.highlight .kc { color: #A90D91 } /* Keyword.Constant */
+.highlight .kd { color: #A90D91 } /* Keyword.Declaration */
+.highlight .kn { color: #A90D91 } /* Keyword.Namespace */
+.highlight .kp { color: #A90D91 } /* Keyword.Pseudo */
+.highlight .kr { color: #A90D91 } /* Keyword.Reserved */
+.highlight .kt { color: #A90D91 } /* Keyword.Type */
+.highlight .ld { color: #1C01CE } /* Literal.Date */
+.highlight .m { color: #1C01CE } /* Literal.Number */
+.highlight .s { color: #C41A16 } /* Literal.String */
+.highlight .na { color: #836C28 } /* Name.Attribute */
+.highlight .nb { color: #A90D91 } /* Name.Builtin */
+.highlight .nc { color: #3F6E75 } /* Name.Class */
+.highlight .no { color: #000 } /* Name.Constant */
+.highlight .nd { color: #000 } /* Name.Decorator */
+.highlight .ni { color: #000 } /* Name.Entity */
+.highlight .ne { color: #000 } /* Name.Exception */
+.highlight .nf { color: #000 } /* Name.Function */
+.highlight .nl { color: #000 } /* Name.Label */
+.highlight .nn { color: #000 } /* Name.Namespace */
+.highlight .nx { color: #000 } /* Name.Other */
+.highlight .py { color: #000 } /* Name.Property */
+.highlight .nt { color: #000 } /* Name.Tag */
+.highlight .nv { color: #000 } /* Name.Variable */
+.highlight .ow { color: #000 } /* Operator.Word */
+.highlight .mb { color: #1C01CE } /* Literal.Number.Bin */
+.highlight .mf { color: #1C01CE } /* Literal.Number.Float */
+.highlight .mh { color: #1C01CE } /* Literal.Number.Hex */
+.highlight .mi { color: #1C01CE } /* Literal.Number.Integer */
+.highlight .mo { color: #1C01CE } /* Literal.Number.Oct */
+.highlight .sa { color: #C41A16 } /* Literal.String.Affix */
+.highlight .sb { color: #C41A16 } /* Literal.String.Backtick */
+.highlight .sc { color: #2300CE } /* Literal.String.Char */
+.highlight .dl { color: #C41A16 } /* Literal.String.Delimiter */
+.highlight .sd { color: #C41A16 } /* Literal.String.Doc */
+.highlight .s2 { color: #C41A16 } /* Literal.String.Double */
+.highlight .se { color: #C41A16 } /* Literal.String.Escape */
+.highlight .sh { color: #C41A16 } /* Literal.String.Heredoc */
+.highlight .si { color: #C41A16 } /* Literal.String.Interpol */
+.highlight .sx { color: #C41A16 } /* Literal.String.Other */
+.highlight .sr { color: #C41A16 } /* Literal.String.Regex */
+.highlight .s1 { color: #C41A16 } /* Literal.String.Single */
+.highlight .ss { color: #C41A16 } /* Literal.String.Symbol */
+.highlight .bp { color: #5B269A } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #000 } /* Name.Function.Magic */
+.highlight .vc { color: #000 } /* Name.Variable.Class */
+.highlight .vg { color: #000 } /* Name.Variable.Global */
+.highlight .vi { color: #000 } /* Name.Variable.Instance */
+.highlight .vm { color: #000 } /* Name.Variable.Magic */
+.highlight .il { color: #1C01CE } /* Literal.Number.Integer.Long */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.75;color:#404040;background:#fff}
+/* ---------- sidebar ---------- */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f8f8f8;border-right:1px solid #e1e4e5;overflow-y:auto;z-index:100;transition:transform .2s ease}
+.sidebar-head{background:#343131;padding:16px 20px 14px}
+.sidebar-head .brand{color:#fff;font-size:16px;font-weight:700;text-decoration:none;display:block;line-height:1.4}
+.sidebar-head .ver{display:inline-block;margin-top:7px;font-size:11px;color:#cfd8dc;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:10px;padding:0 9px;line-height:18px}
+.sidebar-scroll{padding:4px 0 28px}
+.caption{margin:18px 22px 6px;font-size:12px;color:#999;letter-spacing:1px}
+.caption:first-child{margin-top:12px}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.sidebar li a{display:block;padding:5px 22px 5px 24px;color:#404040;text-decoration:none;font-size:14px;border-left:3px solid transparent;line-height:1.5}
+.sidebar li a:hover{background:#eef1f4;color:#2980b9}
+.sidebar li a.active{background:#e7f2fa;border-left-color:#2980b9;color:#2980b9;font-weight:600}
+/* ---------- topbar (mobile) ---------- */
+.topbar{display:none;position:sticky;top:0;z-index:200;background:#343131;color:#fff;padding:10px 14px;align-items:center;gap:12px}
+.topbar button{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:4px;width:34px;height:34px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.topbar .t-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ---------- content ---------- */
+.content{margin-left:300px;min-height:100vh}
+.content-inner{max-width:880px;padding:30px 44px 64px;margin:0 auto}
+.breadcrumbs{font-size:13px;color:#999;margin-bottom:20px}
+.breadcrumbs a{color:#2980b9;text-decoration:none}
+.breadcrumbs a:hover{text-decoration:underline}
+article h1{font-size:27px;line-height:1.35;margin:0 0 8px;color:#404040;font-weight:700}
+article h2{font-size:21px;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid #eaecef;color:#404040;line-height:1.4;font-weight:700}
+article h3{font-size:16.5px;margin:26px 0 8px;color:#404040;font-weight:700}
+article h4{font-size:15px;margin:20px 0 6px;color:#404040;font-weight:700}
+article p{margin:10px 0}
+article a{color:#2980b9;text-decoration:none}
+article a:hover{text-decoration:underline}
+/* ---------- on-page TOC ---------- */
+.toc{background:#f8f8f8;border:1px solid #e1e4e5;border-radius:4px;padding:12px 18px;margin:22px 0 8px}
+.toc-title{font-weight:700;margin:0 0 6px;font-size:14px;color:#404040}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{color:#2980b9;text-decoration:none;font-size:14px}
+.toc a:hover{text-decoration:underline}
+/* ---------- code ---------- */
+code{font-family:"Cascadia Code",Consolas,"Courier New",monospace;background:#f9f2f4;color:#c7254e;border-radius:3px;padding:1px 5px;font-size:13px}
+pre{margin:14px 0}
+.highlight{background:#f6f8fa!important;border:1px solid #e1e4e5;border-radius:4px;overflow-x:auto}
+.highlight pre{padding:13px 16px;margin:0;background:transparent;font-size:13px;line-height:1.6;white-space:pre}
+.highlight code{background:transparent;color:inherit;padding:0}
+/* ---------- tables ---------- */
+.table-wrap{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:0}
+th,td{border:1px solid #e1e4e5;padding:6px 12px;text-align:left;vertical-align:top;word-break:normal}
+th{background:#f0f2f5;font-weight:600}
+/* ---------- notes ---------- */
+blockquote{margin:14px 0;padding:10px 16px;background:#e7f2fa;border-left:3px solid #6ab0de;color:#2c5775}
+blockquote p{margin:4px 0}
+blockquote code{background:rgba(255,255,255,.75)}
+/* ---------- lists / misc ---------- */
+article ul,article ol{padding-left:26px;margin:10px 0}
+article li{margin:3px 0}
+hr{border:none;border-top:1px solid #e1e4e5;margin:26px 0}
+article img{max-width:100%}
+/* ---------- prev / next ---------- */
+.prevnext{display:flex;justify-content:space-between;gap:16px;margin-top:46px;padding-top:16px;border-top:1px solid #e1e4e5;font-size:14px}
+.prevnext .muted{color:#999;font-size:12px;display:block;margin-bottom:2px}
+.prevnext a{color:#2980b9;text-decoration:none}
+.prevnext a:hover{text-decoration:underline}
+/* ---------- footer ---------- */
+.footer{margin-top:24px;padding-top:14px;border-top:1px solid #e1e4e5;color:#999;font-size:12.5px}
+/* ---------- responsive ---------- */
+@media (max-width:959px){
+  .sidebar{transform:translateX(-100%)}
+  .content{margin-left:0}
+  .topbar{display:flex}
+  body.nav-open .sidebar{transform:translateX(0);box-shadow:0 0 24px rgba(0,0,0,.25)}
+  .content-inner{padding:20px 18px 48px}
+}
+@media print{.sidebar,.topbar{display:none!important}.content{margin-left:0}}
+
+</style>
+</head>
+<body>
+<nav class="sidebar" id="sidebar" aria-label="文档导航">
+<div class="sidebar-head"><a class="brand" href="index.html">Edge10 SDK 文档</a><span class="ver">v0.6</span></div><div class="sidebar-scroll"><p class="caption">文档指南</p><ul><li><a href="index.html">索引</a></li><li><a href="01-intro.html">1. 简介</a></li><li><a href="02-architecture.html">2. 架构</a></li><li><a href="03-install-build.html">3. 安装与编译</a></li><li><a href="04-quickstart.html">4. 快速上手</a></li><li><a class="active" href="05-vpc-preprocess.html">5. VPC 预处理</a></li><li><a href="06-codec.html">6. 硬件编解码</a></li><li><a href="07-rc-inference.html">7. RC 推理</a></li><li><a href="08-ep-inference.html">8. EP 推理</a></li><li><a href="09-dual-card.html">9. 双卡并行</a></li><li><a href="10-kcf-tracking.html">10. KCF 目标跟踪</a></li><li><a href="11-end-to-end-pipeline.html">11. 端到端 Pipeline</a></li><li><a href="12-multi-process.html">12. 多路与跨进程</a></li><li><a href="13-troubleshooting.html">13. 故障排查</a></li></ul><p class="caption">C API 参考</p><ul><li><a href="api/index.html">API 总览</a></li><li><a href="api/types.html">公共类型与错误码</a></li><li><a href="api/core.html">运行时</a></li><li><a href="api/device.html">设备</a></li><li><a href="api/memory.html">内存</a></li><li><a href="api/model.html">模型与推理</a></li><li><a href="api/executor.html">执行器</a></li><li><a href="api/vpc.html">VPC</a></li><li><a href="api/codec.html">编解码</a></li><li><a href="api/track.html">跟踪</a></li></ul></div>
+</nav>
+<div class="topbar">
+<button id="nav-toggle" aria-label="切换导航"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+<span class="t-title">Edge10 SDK 文档</span>
+</div>
+<main class="content">
+<div class="content-inner">
+<div class="breadcrumbs"><a href="index.html">文档</a> » 5. VPC 预处理</div>
+<article>
+<h1 id="vpc-图像预处理">5. VPC 图像预处理</h1><div class="toc"><p class="toc-title">目录</p><ul><li><a href="#头文件与句柄">5.1 头文件与句柄</a></li><li><a href="#三个操作">5.2 三个操作</a></li><li><a href="#数据量估算">5.3 数据量估算</a></li><li><a href="#端到端示例nv12-resize-224-rgb-planar">5.4 端到端示例：NV12 → resize 224 → RGB planar</a></li><li><a href="#零拷贝直写模型输入推荐生产用法">5.5 零拷贝直写模型输入（推荐生产用法）</a></li><li><a href="#命令行验证">5.6 命令行验证</a></li></ul></div>
+<p>VPC（Vision Pre-Processor）是硬件加速的图像预处理单元，支持 resize、crop、色彩空间转换。所有操作都在 device 内存上完成，不经过 Host。</p>
+<h2 id="头文件与句柄"><span class="sec-no">5.1</span> 头文件与句柄</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Edge10/Edge10_vpc.h"</span>
+
+<span class="n">Edge10Vpc</span><span class="o">*</span><span class="w"> </span><span class="n">vpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10VpcConfig</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">max_pic_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1920</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">max_pic_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">channel_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Edge10VpcCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="cm">/*device_id=*/</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">);</span><span class="w">   </span><span class="cm">/* cfg 传 NULL 也可 */</span>
+<span class="cm">/* ... resize / crop / convert ... */</span>
+<span class="n">Edge10VpcDestroy</span><span class="p">(</span><span class="n">vpc</span><span class="p">);</span>
+</code></pre></div>
+
+<h2 id="三个操作"><span class="sec-no">5.2</span> 三个操作</h2>
+<div class="highlight"><pre><span></span><code><span class="cm">/* resize：把 src 缩放到 dst 的尺寸 */</span>
+<span class="n">Edge10Error</span><span class="w"> </span><span class="nf">Edge10VpcResize</span><span class="p">(</span><span class="n">Edge10Vpc</span><span class="o">*</span><span class="w"> </span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">dst</span><span class="p">);</span>
+
+<span class="cm">/* crop：从 src 抠出 ROI，写入 dst */</span>
+<span class="n">Edge10Rect</span><span class="w"> </span><span class="n">roi</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">400</span><span class="w"> </span><span class="p">};</span>
+<span class="n">Edge10Error</span><span class="w"> </span><span class="nf">Edge10VpcCrop</span><span class="p">(</span><span class="n">Edge10Vpc</span><span class="o">*</span><span class="w"> </span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">roi</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">dst</span><span class="p">);</span>
+
+<span class="cm">/* 色彩空间转换：按 src/dst Tensor 的像素格式自动转换 */</span>
+<span class="n">Edge10Error</span><span class="w"> </span><span class="nf">Edge10VpcConvert</span><span class="p">(</span><span class="n">Edge10Vpc</span><span class="o">*</span><span class="w"> </span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">src</span><span class="p">,</span><span class="w"> </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">dst</span><span class="p">);</span>
+</code></pre></div>
+
+<h3 id="常用像素格式edge10pixelformat">常用像素格式（<code>Edge10PixelFormat</code>）</h3>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>值</th>
+<th>宏</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>EDGE10_PIXEL_NV12</code></td>
+<td>YUV420 semi-planar（VDEC 默认输出）</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>EDGE10_PIXEL_NV21</code></td>
+<td></td>
+</tr>
+<tr>
+<td>12</td>
+<td><code>EDGE10_PIXEL_RGB888_PACKED</code></td>
+<td>RGB 交错</td>
+</tr>
+<tr>
+<td>13</td>
+<td><code>EDGE10_PIXEL_BGR888_PACKED</code></td>
+<td>BGR 交错</td>
+</tr>
+<tr>
+<td>70</td>
+<td><code>EDGE10_PIXEL_RGB888_PLANAR</code></td>
+<td>RGB 三平面（模型常用）</td>
+</tr>
+<tr>
+<td>71</td>
+<td><code>EDGE10_PIXEL_BGR888_PLANAR</code></td>
+<td>BGR 三平面</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="数据量估算"><span class="sec-no">5.3</span> 数据量估算</h2>
+<ul>
+<li>NV12：<code>width * height * 3 / 2</code> 字节</li>
+<li>RGB/BGR packed：<code>width * height * 3</code> 字节</li>
+<li>RGB/BGR planar：同上，按 plane 排布</li>
+</ul>
+<blockquote>
+<p>注意 stride：VDEC / VPC 输出的宽高可能不是 16 对齐的，务必使用
+<code>width_stride</code> / <code>height_stride</code>（见 <a href="06-codec.html">06_硬件编解码</a>）来计算真实
+帧大小，不要直接用 <code>width*height*3/2</code>。</p>
+</blockquote>
+<h2 id="端到端示例nv12-resize-224-rgb-planar"><span class="sec-no">5.4</span> 端到端示例：NV12 → resize 224 → RGB planar</h2>
+<p>完整可跑版本见 <code>samples/src/flow/sample_vpc.c</code> 和
+<code>samples/src/single/sample_vpc.c</code>。核心序列：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Edge10Vpc</span><span class="o">*</span><span class="w"> </span><span class="n">vpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10VpcCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+
+<span class="cm">/* 把 Host 上的 NV12 图上传到 device */</span>
+<span class="n">Edge10Buffer</span><span class="o">*</span><span class="w"> </span><span class="n">src_dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10Malloc</span><span class="p">(</span><span class="o">&amp;</span><span class="n">src_dev</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">src_bytes</span><span class="p">);</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">src_virt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10GetVirtAddr</span><span class="p">(</span><span class="n">src_dev</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">src_virt</span><span class="p">);</span>
+<span class="cm">/* memcpy host -&gt; src_virt（H2D） */</span>
+
+<span class="cm">/* 构造 src / dst Tensor（dims 仅用于描述形状，实际数据在 device buffer） */</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">src_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">SW</span><span class="p">,</span><span class="w"> </span><span class="n">SH</span><span class="w"> </span><span class="p">};</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">mid_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">TW</span><span class="p">,</span><span class="w"> </span><span class="n">TH</span><span class="w"> </span><span class="p">};</span><span class="w">   </span><span class="cm">/* 224x224 NV12 */</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">dst_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">TW</span><span class="o">*</span><span class="n">TH</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="cm">/* RGB planar */</span>
+<span class="n">Edge10Tensor</span><span class="w"> </span><span class="o">*</span><span class="n">src_t</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">mid_t</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">dst_t</span><span class="p">;</span>
+<span class="n">Edge10TensorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">src_t</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">src_dims</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">EDGE10_DT_UINT8</span><span class="p">);</span>
+<span class="n">Edge10TensorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">mid_t</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">mid_dims</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">EDGE10_DT_UINT8</span><span class="p">);</span>
+<span class="n">Edge10TensorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dst_t</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dst_dims</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">EDGE10_DT_UINT8</span><span class="p">);</span>
+
+<span class="n">Edge10VpcResize</span><span class="p">(</span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">src_t</span><span class="p">,</span><span class="w"> </span><span class="n">mid_t</span><span class="p">);</span><span class="w">       </span><span class="cm">/* 1920x1080 NV12 -&gt; 224x224 NV12 */</span>
+<span class="n">Edge10VpcConvert</span><span class="p">(</span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">mid_t</span><span class="p">,</span><span class="w"> </span><span class="n">dst_t</span><span class="p">);</span><span class="w">      </span><span class="cm">/* NV12 -&gt; RGB planar */</span>
+
+<span class="cm">/* 把 dst_t 拷回 Host 保存 */</span>
+<span class="n">Edge10Buffer</span><span class="o">*</span><span class="w"> </span><span class="n">dst_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">dst_virt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10TensorGetBuffer</span><span class="p">(</span><span class="n">dst_t</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dst_buf</span><span class="p">);</span>
+<span class="n">Edge10GetVirtAddr</span><span class="p">(</span><span class="n">dst_buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dst_virt</span><span class="p">);</span>
+<span class="cm">/* memcpy dst_virt -&gt; host (D2H) */</span>
+
+<span class="n">Edge10TensorDestroy</span><span class="p">(</span><span class="n">dst_t</span><span class="p">);</span><span class="w"> </span><span class="n">Edge10TensorDestroy</span><span class="p">(</span><span class="n">mid_t</span><span class="p">);</span><span class="w"> </span><span class="n">Edge10TensorDestroy</span><span class="p">(</span><span class="n">src_t</span><span class="p">);</span>
+<span class="n">Edge10Free</span><span class="p">(</span><span class="n">src_dev</span><span class="p">);</span>
+<span class="n">Edge10VpcDestroy</span><span class="p">(</span><span class="n">vpc</span><span class="p">);</span>
+</code></pre></div>
+
+<h2 id="零拷贝直写模型输入推荐生产用法"><span class="sec-no">5.5</span> 零拷贝直写模型输入（推荐生产用法）</h2>
+<p>推理前通常要把预处理结果直接写进模型的输入 buffer，避免一次额外拷贝。
+配合 <code>Edge10ExecutorGetContext</code>：</p>
+<div class="highlight"><pre><span></span><code><span class="n">Edge10Context</span><span class="o">*</span><span class="w"> </span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10ExecutorGetContext</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ctx</span><span class="p">);</span>
+<span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">ctx_in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10GetInputTensor</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ctx_in</span><span class="p">);</span>
+<span class="n">Edge10Buffer</span><span class="o">*</span><span class="w"> </span><span class="n">in_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10TensorGetBuffer</span><span class="p">(</span><span class="n">ctx_in</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">in_buf</span><span class="p">);</span>
+<span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">in_virt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="kt">uint64_t</span><span class="w"> </span><span class="n">in_phy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">Edge10GetVirtAddr</span><span class="p">(</span><span class="n">in_buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">in_virt</span><span class="p">);</span>
+<span class="n">Edge10GetPhysAddr</span><span class="p">(</span><span class="n">in_buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">in_phy</span><span class="p">);</span>
+
+<span class="cm">/* VPC 的 dst 直接指向 in_buf，不再单独分配中间 tensor */</span>
+<span class="n">Edge10VpcConvert</span><span class="p">(</span><span class="n">vpc</span><span class="p">,</span><span class="w"> </span><span class="n">mid_t</span><span class="p">,</span><span class="w"> </span><span class="n">ctx_in</span><span class="p">);</span>
+
+<span class="cm">/* 跳过 stage 输入拷贝：传 in=NULL */</span>
+<span class="n">Edge10ExecutorInfer</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="n">out_t</span><span class="p">);</span>
+</code></pre></div>
+
+<p>完整例子见 <code>samples/src/flow/sample_pipeline.c</code> 和
+<code>samples/src/flow/sample_video_pipeline.c</code>。</p>
+<h2 id="命令行验证"><span class="sec-no">5.6</span> 命令行验证</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># 把 1920x1080 NV12 缩放到 224x224 并转 RGB planar</span>
+edge10<span class="w"> </span>--rc<span class="w"> </span>flow_vpc_rc<span class="w"> </span>-i<span class="w"> </span>/tmp/1080p.nv12<span class="w"> </span>-o<span class="w"> </span>/tmp/out.rgb<span class="w"> </span>-w<span class="w"> </span><span class="m">1920</span><span class="w"> </span>-h<span class="w"> </span><span class="m">1080</span>
+</code></pre></div>
+</article>
+<div class="prevnext"><div class="pn-prev"><span class="muted">← 上一页</span><a href="04-quickstart.html">4. 快速上手</a></div><div class="pn-next"><span class="muted">下一页 →</span><a href="06-codec.html">6. 硬件编解码</a></div></div>
+</div>
+</main>
+<script>
+(function(){
+var body=document.body,tg=document.getElementById("nav-toggle");
+if(tg){tg.addEventListener("click",function(){body.classList.toggle("nav-open");});}
+var links=document.querySelectorAll(".sidebar a");
+for(var i=0;i<links.length;i++){links[i].addEventListener("click",function(){if(window.innerWidth<960){body.classList.remove("nav-open");}});}
+})();
+</script>
+</body>
+</html>

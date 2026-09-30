@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Edge10 SDK docs builder">
+<title>4. 快速上手 — Edge10 SDK 文档</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343131'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='bold' text-anchor='middle' fill='%232980b9' font-family='Arial'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #177500 } /* Comment */
+.highlight .err { color: #000 } /* Error */
+.highlight .k { color: #A90D91 } /* Keyword */
+.highlight .l { color: #1C01CE } /* Literal */
+.highlight .n { color: #000 } /* Name */
+.highlight .o { color: #000 } /* Operator */
+.highlight .ch { color: #177500 } /* Comment.Hashbang */
+.highlight .cm { color: #177500 } /* Comment.Multiline */
+.highlight .cp { color: #633820 } /* Comment.Preproc */
+.highlight .cpf { color: #177500 } /* Comment.PreprocFile */
+.highlight .c1 { color: #177500 } /* Comment.Single */
+.highlight .cs { color: #177500 } /* Comment.Special */
+.highlight .kc { color: #A90D91 } /* Keyword.Constant */
+.highlight .kd { color: #A90D91 } /* Keyword.Declaration */
+.highlight .kn { color: #A90D91 } /* Keyword.Namespace */
+.highlight .kp { color: #A90D91 } /* Keyword.Pseudo */
+.highlight .kr { color: #A90D91 } /* Keyword.Reserved */
+.highlight .kt { color: #A90D91 } /* Keyword.Type */
+.highlight .ld { color: #1C01CE } /* Literal.Date */
+.highlight .m { color: #1C01CE } /* Literal.Number */
+.highlight .s { color: #C41A16 } /* Literal.String */
+.highlight .na { color: #836C28 } /* Name.Attribute */
+.highlight .nb { color: #A90D91 } /* Name.Builtin */
+.highlight .nc { color: #3F6E75 } /* Name.Class */
+.highlight .no { color: #000 } /* Name.Constant */
+.highlight .nd { color: #000 } /* Name.Decorator */
+.highlight .ni { color: #000 } /* Name.Entity */
+.highlight .ne { color: #000 } /* Name.Exception */
+.highlight .nf { color: #000 } /* Name.Function */
+.highlight .nl { color: #000 } /* Name.Label */
+.highlight .nn { color: #000 } /* Name.Namespace */
+.highlight .nx { color: #000 } /* Name.Other */
+.highlight .py { color: #000 } /* Name.Property */
+.highlight .nt { color: #000 } /* Name.Tag */
+.highlight .nv { color: #000 } /* Name.Variable */
+.highlight .ow { color: #000 } /* Operator.Word */
+.highlight .mb { color: #1C01CE } /* Literal.Number.Bin */
+.highlight .mf { color: #1C01CE } /* Literal.Number.Float */
+.highlight .mh { color: #1C01CE } /* Literal.Number.Hex */
+.highlight .mi { color: #1C01CE } /* Literal.Number.Integer */
+.highlight .mo { color: #1C01CE } /* Literal.Number.Oct */
+.highlight .sa { color: #C41A16 } /* Literal.String.Affix */
+.highlight .sb { color: #C41A16 } /* Literal.String.Backtick */
+.highlight .sc { color: #2300CE } /* Literal.String.Char */
+.highlight .dl { color: #C41A16 } /* Literal.String.Delimiter */
+.highlight .sd { color: #C41A16 } /* Literal.String.Doc */
+.highlight .s2 { color: #C41A16 } /* Literal.String.Double */
+.highlight .se { color: #C41A16 } /* Literal.String.Escape */
+.highlight .sh { color: #C41A16 } /* Literal.String.Heredoc */
+.highlight .si { color: #C41A16 } /* Literal.String.Interpol */
+.highlight .sx { color: #C41A16 } /* Literal.String.Other */
+.highlight .sr { color: #C41A16 } /* Literal.String.Regex */
+.highlight .s1 { color: #C41A16 } /* Literal.String.Single */
+.highlight .ss { color: #C41A16 } /* Literal.String.Symbol */
+.highlight .bp { color: #5B269A } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #000 } /* Name.Function.Magic */
+.highlight .vc { color: #000 } /* Name.Variable.Class */
+.highlight .vg { color: #000 } /* Name.Variable.Global */
+.highlight .vi { color: #000 } /* Name.Variable.Instance */
+.highlight .vm { color: #000 } /* Name.Variable.Magic */
+.highlight .il { color: #1C01CE } /* Literal.Number.Integer.Long */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.75;color:#404040;background:#fff}
+/* ---------- sidebar ---------- */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f8f8f8;border-right:1px solid #e1e4e5;overflow-y:auto;z-index:100;transition:transform .2s ease}
+.sidebar-head{background:#343131;padding:16px 20px 14px}
+.sidebar-head .brand{color:#fff;font-size:16px;font-weight:700;text-decoration:none;display:block;line-height:1.4}
+.sidebar-head .ver{display:inline-block;margin-top:7px;font-size:11px;color:#cfd8dc;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:10px;padding:0 9px;line-height:18px}
+.sidebar-scroll{padding:4px 0 28px}
+.caption{margin:18px 22px 6px;font-size:12px;color:#999;letter-spacing:1px}
+.caption:first-child{margin-top:12px}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.sidebar li a{display:block;padding:5px 22px 5px 24px;color:#404040;text-decoration:none;font-size:14px;border-left:3px solid transparent;line-height:1.5}
+.sidebar li a:hover{background:#eef1f4;color:#2980b9}
+.sidebar li a.active{background:#e7f2fa;border-left-color:#2980b9;color:#2980b9;font-weight:600}
+/* ---------- topbar (mobile) ---------- */
+.topbar{display:none;position:sticky;top:0;z-index:200;background:#343131;color:#fff;padding:10px 14px;align-items:center;gap:12px}
+.topbar button{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:4px;width:34px;height:34px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.topbar .t-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ---------- content ---------- */
+.content{margin-left:300px;min-height:100vh}
+.content-inner{max-width:880px;padding:30px 44px 64px;margin:0 auto}
+.breadcrumbs{font-size:13px;color:#999;margin-bottom:20px}
+.breadcrumbs a{color:#2980b9;text-decoration:none}
+.breadcrumbs a:hover{text-decoration:underline}
+article h1{font-size:27px;line-height:1.35;margin:0 0 8px;color:#404040;font-weight:700}
+article h2{font-size:21px;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid #eaecef;color:#404040;line-height:1.4;font-weight:700}
+article h3{font-size:16.5px;margin:26px 0 8px;color:#404040;font-weight:700}
+article h4{font-size:15px;margin:20px 0 6px;color:#404040;font-weight:700}
+article p{margin:10px 0}
+article a{color:#2980b9;text-decoration:none}
+article a:hover{text-decoration:underline}
+/* ---------- on-page TOC ---------- */
+.toc{background:#f8f8f8;border:1px solid #e1e4e5;border-radius:4px;padding:12px 18px;margin:22px 0 8px}
+.toc-title{font-weight:700;margin:0 0 6px;font-size:14px;color:#404040}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{color:#2980b9;text-decoration:none;font-size:14px}
+.toc a:hover{text-decoration:underline}
+/* ---------- code ---------- */
+code{font-family:"Cascadia Code",Consolas,"Courier New",monospace;background:#f9f2f4;color:#c7254e;border-radius:3px;padding:1px 5px;font-size:13px}
+pre{margin:14px 0}
+.highlight{background:#f6f8fa!important;border:1px solid #e1e4e5;border-radius:4px;overflow-x:auto}
+.highlight pre{padding:13px 16px;margin:0;background:transparent;font-size:13px;line-height:1.6;white-space:pre}
+.highlight code{background:transparent;color:inherit;padding:0}
+/* ---------- tables ---------- */
+.table-wrap{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:0}
+th,td{border:1px solid #e1e4e5;padding:6px 12px;text-align:left;vertical-align:top;word-break:normal}
+th{background:#f0f2f5;font-weight:600}
+/* ---------- notes ---------- */
+blockquote{margin:14px 0;padding:10px 16px;background:#e7f2fa;border-left:3px solid #6ab0de;color:#2c5775}
+blockquote p{margin:4px 0}
+blockquote code{background:rgba(255,255,255,.75)}
+/* ---------- lists / misc ---------- */
+article ul,article ol{padding-left:26px;margin:10px 0}
+article li{margin:3px 0}
+hr{border:none;border-top:1px solid #e1e4e5;margin:26px 0}
+article img{max-width:100%}
+/* ---------- prev / next ---------- */
+.prevnext{display:flex;justify-content:space-between;gap:16px;margin-top:46px;padding-top:16px;border-top:1px solid #e1e4e5;font-size:14px}
+.prevnext .muted{color:#999;font-size:12px;display:block;margin-bottom:2px}
+.prevnext a{color:#2980b9;text-decoration:none}
+.prevnext a:hover{text-decoration:underline}
+/* ---------- footer ---------- */
+.footer{margin-top:24px;padding-top:14px;border-top:1px solid #e1e4e5;color:#999;font-size:12.5px}
+/* ---------- responsive ---------- */
+@media (max-width:959px){
+  .sidebar{transform:translateX(-100%)}
+  .content{margin-left:0}
+  .topbar{display:flex}
+  body.nav-open .sidebar{transform:translateX(0);box-shadow:0 0 24px rgba(0,0,0,.25)}
+  .content-inner{padding:20px 18px 48px}
+}
+@media print{.sidebar,.topbar{display:none!important}.content{margin-left:0}}
+
+</style>
+</head>
+<body>
+<nav class="sidebar" id="sidebar" aria-label="文档导航">
+<div class="sidebar-head"><a class="brand" href="index.html">Edge10 SDK 文档</a><span class="ver">v0.6</span></div><div class="sidebar-scroll"><p class="caption">文档指南</p><ul><li><a href="index.html">索引</a></li><li><a href="01-intro.html">1. 简介</a></li><li><a href="02-architecture.html">2. 架构</a></li><li><a href="03-install-build.html">3. 安装与编译</a></li><li><a class="active" href="04-quickstart.html">4. 快速上手</a></li><li><a href="05-vpc-preprocess.html">5. VPC 预处理</a></li><li><a href="06-codec.html">6. 硬件编解码</a></li><li><a href="07-rc-inference.html">7. RC 推理</a></li><li><a href="08-ep-inference.html">8. EP 推理</a></li><li><a href="09-dual-card.html">9. 双卡并行</a></li><li><a href="10-kcf-tracking.html">10. KCF 目标跟踪</a></li><li><a href="11-end-to-end-pipeline.html">11. 端到端 Pipeline</a></li><li><a href="12-multi-process.html">12. 多路与跨进程</a></li><li><a href="13-troubleshooting.html">13. 故障排查</a></li></ul><p class="caption">C API 参考</p><ul><li><a href="api/index.html">API 总览</a></li><li><a href="api/types.html">公共类型与错误码</a></li><li><a href="api/core.html">运行时</a></li><li><a href="api/device.html">设备</a></li><li><a href="api/memory.html">内存</a></li><li><a href="api/model.html">模型与推理</a></li><li><a href="api/executor.html">执行器</a></li><li><a href="api/vpc.html">VPC</a></li><li><a href="api/codec.html">编解码</a></li><li><a href="api/track.html">跟踪</a></li></ul></div>
+</nav>
+<div class="topbar">
+<button id="nav-toggle" aria-label="切换导航"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+<span class="t-title">Edge10 SDK 文档</span>
+</div>
+<main class="content">
+<div class="content-inner">
+<div class="breadcrumbs"><a href="index.html">文档</a> » 4. 快速上手</div>
+<article>
+<h1 id="快速上手">4. 快速上手</h1><div class="toc"><p class="toc-title">目录</p><ul><li><a href="#1-5-行最小流程">4.1 5 行最小流程</a></li><li><a href="#2-完整示例跑一张随机输入的分类模型">4.2 完整示例：跑一张随机输入的分类模型</a></li><li><a href="#3-运行">4.3 运行</a></li><li><a href="#4-尺寸规则">4.4 尺寸规则</a></li><li><a href="#5-多文件并行-rc-ep">4.5 多文件并行（--rc-ep）</a></li><li><a href="#6-下一步">4.6 下一步</a></li></ul></div>
+<p>本章用一个最小可跑的例子串起 <strong>初始化 → 加载模型 → 推理 → 读结果 → 清理</strong>全流程。完整可编译版本见 <code>samples/src/flow/sample_infer.c</code>。</p>
+<h2 id="1-5-行最小流程"><span class="sec-no">4.1</span> 5 行最小流程</h2>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Edge10/Edge10_all.h"</span>
+
+<span class="n">Edge10Init</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span><span class="w">                       </span><span class="c1">// RC 模式；EP 传 cfg 路径</span>
+<span class="n">Edge10Executor</span><span class="o">*</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">Edge10ExecutorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span><span class="w">         </span><span class="c1">// 绑定 device 0</span>
+<span class="n">Edge10ExecutorLoadModel</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="s">"model.ty"</span><span class="p">);</span>
+<span class="cm">/* ... 创建输入 Tensor、填数据、Edge10ExecutorInfer(...) ... */</span>
+<span class="n">Edge10ExecutorDestroy</span><span class="p">(</span><span class="n">exec</span><span class="p">);</span>
+<span class="n">Edge10Finalize</span><span class="p">();</span>
+</code></pre></div>
+
+<h2 id="2-完整示例跑一张随机输入的分类模型"><span class="sec-no">4.2</span> 完整示例：跑一张随机输入的分类模型</h2>
+<p>下面这段代码与 <code>samples/src/flow/sample_infer.c</code> 等价，resnet50 输出 1000 类，打印 Top-5：</p>
+<div class="highlight"><pre><span></span><code><span class="cp">#include</span><span class="w"> </span><span class="cpf">"Edge10/Edge10_all.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;string.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;unistd.h&gt;</span>
+
+<span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">fill_random</span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="p">)(</span><span class="n">rand</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="mh">0xFF</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"usage: %s &lt;model.ty&gt;</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Edge10Error</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Edge10Init</span><span class="p">(</span><span class="nb">NULL</span><span class="p">);</span><span class="w">          </span><span class="cm">/* RC；EP 传 cfg 路径 */</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">EDGE10_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">Edge10Executor</span><span class="o">*</span><span class="w"> </span><span class="n">exec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Edge10ExecutorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10ExecutorLoadModel</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="cm">/* 输入：Host 侧 (1,3,224,224) uint8；device_id = -1 表示 Host */</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">in_dims</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">224</span><span class="p">,</span><span class="w"> </span><span class="mi">224</span><span class="p">};</span>
+<span class="w">    </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Edge10TensorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">in_dims</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">EDGE10_DT_UINT8</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">Edge10Buffer</span><span class="o">*</span><span class="w"> </span><span class="n">buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="kt">void</span><span class="o">*</span><span class="w"> </span><span class="n">virt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Edge10TensorGetBuffer</span><span class="p">(</span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10GetVirtAddr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">virt</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10GetBufferSize</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sz</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fill_random</span><span class="p">((</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">virt</span><span class="p">,</span><span class="w"> </span><span class="n">sz</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* 输出：Host 侧 (1,1000) float */</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">int64_t</span><span class="w"> </span><span class="n">out_dims</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">1000</span><span class="p">};</span>
+<span class="w">    </span><span class="n">Edge10Tensor</span><span class="o">*</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Edge10TensorCreate</span><span class="p">(</span><span class="o">&amp;</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="n">out_dims</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">EDGE10_DT_FLOAT</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* 推理 */</span>
+<span class="w">    </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Edge10ExecutorInfer</span><span class="p">(</span><span class="n">exec</span><span class="p">,</span><span class="w"> </span><span class="n">in</span><span class="p">,</span><span class="w"> </span><span class="n">out</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ret</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">EDGE10_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">Edge10TensorGetBuffer</span><span class="p">(</span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">buf</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Edge10GetVirtAddr</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">virt</span><span class="p">);</span>
+<span class="w">        </span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="w"> </span><span class="n">logits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="n">virt</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">;</span><span class="w"> </span><span class="o">++</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="n">printf</span><span class="p">(</span><span class="s">"class %d : %+.6f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">logits</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">Edge10TensorDestroy</span><span class="p">(</span><span class="n">in</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10TensorDestroy</span><span class="p">(</span><span class="n">out</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10ExecutorDestroy</span><span class="p">(</span><span class="n">exec</span><span class="p">);</span>
+
+<span class="w">    </span><span class="cm">/* EP 模式：让 EP 侧 server 完成资源回收，避免 dclFinalize 时 RPC 竞态 */</span>
+<span class="w">    </span><span class="n">usleep</span><span class="p">(</span><span class="mi">200</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">);</span>
+<span class="w">    </span><span class="n">Edge10Finalize</span><span class="p">();</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="3-运行"><span class="sec-no">4.3</span> 运行</h2>
+<p>SDK 自带预编译好的二进制，直接跑：</p>
+<div class="highlight"><pre><span></span><code><span class="nb">source</span><span class="w"> </span>/opt/edge10-sdk/env.sh
+
+<span class="c1"># RC（RC NPU）</span>
+edge10<span class="w"> </span>--rc<span class="w"> </span>flow_infer_rc<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty
+
+<span class="c1"># EP（PCIe 远程）</span>
+edge10<span class="w"> </span>--ep<span class="w"> </span>flow_infer_ep<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty
+
+<span class="c1"># 双进程并行（同一模型跑两份，分别在 RC 和 EP）</span>
+edge10<span class="w"> </span>--rc-ep<span class="w"> </span>flow_infer_ep<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty
+</code></pre></div>
+
+<blockquote>
+<p><code>edge10</code> 是统一入口，会自动：解析 <code>--rc/--ep/--rc-ep</code>、补全二进制路径、
+起 mount namespace（EP）、设置环境变量。详见 <a href="09-dual-card.html">09_双卡并行</a>。</p>
+</blockquote>
+<h2 id="4-尺寸规则"><span class="sec-no">4.4</span> 尺寸规则</h2>
+<p>除 <code>infer</code> 和 <code>track-video</code> 外，<strong>所有模块必须显式传 <code>-w -h</code></strong>：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 错误：ERROR: flow_classify 必须传 -w -h</span>
+edge10<span class="w"> </span>--rc<span class="w"> </span>flow_classify_rc<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty<span class="w"> </span>-i<span class="w"> </span><span class="k">in</span>.jpg<span class="w"> </span>-o<span class="w"> </span>out.jpg
+
+<span class="c1"># 正确</span>
+edge10<span class="w"> </span>--rc<span class="w"> </span>flow_classify_rc<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty<span class="w"> </span>-i<span class="w"> </span><span class="k">in</span>.jpg<span class="w"> </span>-o<span class="w"> </span>out.jpg<span class="w"> </span>-w<span class="w"> </span><span class="m">1920</span><span class="w"> </span>-h<span class="w"> </span><span class="m">1080</span>
+</code></pre></div>
+
+<ul>
+<li><strong>JPEG / H.264 / H.265 输入</strong>：<code>-w -h</code> 是提示，实际尺寸由解码器返回</li>
+<li><strong>NV12 裸文件</strong>：<code>-w -h</code> 必须完全匹配文件真实尺寸</li>
+</ul>
+<h2 id="5-多文件并行-rc-ep"><span class="sec-no">4.5</span> 多文件并行（--rc-ep）</h2>
+<p>多个输入文件时，<code>--rc-ep</code> 自动走<strong>任务队列</strong>——RC/EP 两个 worker 抢任务，谁空闲谁跑：</p>
+<div class="highlight"><pre><span></span><code>edge10<span class="w"> </span>--rc-ep<span class="w"> </span>flow_classify_ep<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-i<span class="w"> </span><span class="s2">"images/*.jpg"</span><span class="w"> </span>-o<span class="w"> </span>out/<span class="w"> </span>-w<span class="w"> </span><span class="m">1920</span><span class="w"> </span>-h<span class="w"> </span><span class="m">1080</span>
+</code></pre></div>
+
+<ul>
+<li>用户只需记住 <code>--rc-ep</code>，队列逻辑内部处理</li>
+<li>输出文件名不带 <code>_rc</code>/<code>_ep</code>，两卡结果合并到一个目录</li>
+<li>实测：6 个 3s 视频转码 25.5s → 18.0s（1.42x）</li>
+</ul>
+<p>详见 <a href="09-dual-card.html">09_双卡并行</a>。</p>
+<h2 id="6-下一步"><span class="sec-no">4.6</span> 下一步</h2>
+<ul>
+<li>真要跑图像：<a href="11-end-to-end-pipeline.html">11_端到端Pipeline</a>（JPEG→VDEC→VPC→推理）</li>
+<li>视频流：<a href="06-codec.html">06_硬件编解码</a></li>
+<li>多目标跟踪：<a href="10-kcf-tracking.html">10_KCF目标跟踪</a></li>
+<li>逐函数签名：<a href="api/index.html">api/</a></li>
+</ul>
+</article>
+<div class="prevnext"><div class="pn-prev"><span class="muted">← 上一页</span><a href="03-install-build.html">3. 安装与编译</a></div><div class="pn-next"><span class="muted">下一页 →</span><a href="05-vpc-preprocess.html">5. VPC 预处理</a></div></div>
+</div>
+</main>
+<script>
+(function(){
+var body=document.body,tg=document.getElementById("nav-toggle");
+if(tg){tg.addEventListener("click",function(){body.classList.toggle("nav-open");});}
+var links=document.querySelectorAll(".sidebar a");
+for(var i=0;i<links.length;i++){links[i].addEventListener("click",function(){if(window.innerWidth<960){body.classList.remove("nav-open");}});}
+})();
+</script>
+</body>
+</html>

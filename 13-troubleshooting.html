@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Edge10 SDK docs builder">
+<title>13. 故障排查 — Edge10 SDK 文档</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343131'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='bold' text-anchor='middle' fill='%232980b9' font-family='Arial'%3EE%3C/text%3E%3C/svg%3E">
+<style>
+pre { line-height: 125%; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+.highlight .hll { background-color: #ffffcc }
+.highlight { background: #ffffff; }
+.highlight .c { color: #177500 } /* Comment */
+.highlight .err { color: #000 } /* Error */
+.highlight .k { color: #A90D91 } /* Keyword */
+.highlight .l { color: #1C01CE } /* Literal */
+.highlight .n { color: #000 } /* Name */
+.highlight .o { color: #000 } /* Operator */
+.highlight .ch { color: #177500 } /* Comment.Hashbang */
+.highlight .cm { color: #177500 } /* Comment.Multiline */
+.highlight .cp { color: #633820 } /* Comment.Preproc */
+.highlight .cpf { color: #177500 } /* Comment.PreprocFile */
+.highlight .c1 { color: #177500 } /* Comment.Single */
+.highlight .cs { color: #177500 } /* Comment.Special */
+.highlight .kc { color: #A90D91 } /* Keyword.Constant */
+.highlight .kd { color: #A90D91 } /* Keyword.Declaration */
+.highlight .kn { color: #A90D91 } /* Keyword.Namespace */
+.highlight .kp { color: #A90D91 } /* Keyword.Pseudo */
+.highlight .kr { color: #A90D91 } /* Keyword.Reserved */
+.highlight .kt { color: #A90D91 } /* Keyword.Type */
+.highlight .ld { color: #1C01CE } /* Literal.Date */
+.highlight .m { color: #1C01CE } /* Literal.Number */
+.highlight .s { color: #C41A16 } /* Literal.String */
+.highlight .na { color: #836C28 } /* Name.Attribute */
+.highlight .nb { color: #A90D91 } /* Name.Builtin */
+.highlight .nc { color: #3F6E75 } /* Name.Class */
+.highlight .no { color: #000 } /* Name.Constant */
+.highlight .nd { color: #000 } /* Name.Decorator */
+.highlight .ni { color: #000 } /* Name.Entity */
+.highlight .ne { color: #000 } /* Name.Exception */
+.highlight .nf { color: #000 } /* Name.Function */
+.highlight .nl { color: #000 } /* Name.Label */
+.highlight .nn { color: #000 } /* Name.Namespace */
+.highlight .nx { color: #000 } /* Name.Other */
+.highlight .py { color: #000 } /* Name.Property */
+.highlight .nt { color: #000 } /* Name.Tag */
+.highlight .nv { color: #000 } /* Name.Variable */
+.highlight .ow { color: #000 } /* Operator.Word */
+.highlight .mb { color: #1C01CE } /* Literal.Number.Bin */
+.highlight .mf { color: #1C01CE } /* Literal.Number.Float */
+.highlight .mh { color: #1C01CE } /* Literal.Number.Hex */
+.highlight .mi { color: #1C01CE } /* Literal.Number.Integer */
+.highlight .mo { color: #1C01CE } /* Literal.Number.Oct */
+.highlight .sa { color: #C41A16 } /* Literal.String.Affix */
+.highlight .sb { color: #C41A16 } /* Literal.String.Backtick */
+.highlight .sc { color: #2300CE } /* Literal.String.Char */
+.highlight .dl { color: #C41A16 } /* Literal.String.Delimiter */
+.highlight .sd { color: #C41A16 } /* Literal.String.Doc */
+.highlight .s2 { color: #C41A16 } /* Literal.String.Double */
+.highlight .se { color: #C41A16 } /* Literal.String.Escape */
+.highlight .sh { color: #C41A16 } /* Literal.String.Heredoc */
+.highlight .si { color: #C41A16 } /* Literal.String.Interpol */
+.highlight .sx { color: #C41A16 } /* Literal.String.Other */
+.highlight .sr { color: #C41A16 } /* Literal.String.Regex */
+.highlight .s1 { color: #C41A16 } /* Literal.String.Single */
+.highlight .ss { color: #C41A16 } /* Literal.String.Symbol */
+.highlight .bp { color: #5B269A } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #000 } /* Name.Function.Magic */
+.highlight .vc { color: #000 } /* Name.Variable.Class */
+.highlight .vg { color: #000 } /* Name.Variable.Global */
+.highlight .vi { color: #000 } /* Name.Variable.Instance */
+.highlight .vm { color: #000 } /* Name.Variable.Magic */
+.highlight .il { color: #1C01CE } /* Literal.Number.Integer.Long */
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;font-family:"Segoe UI","Microsoft YaHei","PingFang SC","Noto Sans CJK SC","Helvetica Neue",Arial,sans-serif;font-size:15px;line-height:1.75;color:#404040;background:#fff}
+/* ---------- sidebar ---------- */
+.sidebar{position:fixed;top:0;left:0;bottom:0;width:300px;background:#f8f8f8;border-right:1px solid #e1e4e5;overflow-y:auto;z-index:100;transition:transform .2s ease}
+.sidebar-head{background:#343131;padding:16px 20px 14px}
+.sidebar-head .brand{color:#fff;font-size:16px;font-weight:700;text-decoration:none;display:block;line-height:1.4}
+.sidebar-head .ver{display:inline-block;margin-top:7px;font-size:11px;color:#cfd8dc;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.28);border-radius:10px;padding:0 9px;line-height:18px}
+.sidebar-scroll{padding:4px 0 28px}
+.caption{margin:18px 22px 6px;font-size:12px;color:#999;letter-spacing:1px}
+.caption:first-child{margin-top:12px}
+.sidebar ul{list-style:none;margin:0;padding:0}
+.sidebar li a{display:block;padding:5px 22px 5px 24px;color:#404040;text-decoration:none;font-size:14px;border-left:3px solid transparent;line-height:1.5}
+.sidebar li a:hover{background:#eef1f4;color:#2980b9}
+.sidebar li a.active{background:#e7f2fa;border-left-color:#2980b9;color:#2980b9;font-weight:600}
+/* ---------- topbar (mobile) ---------- */
+.topbar{display:none;position:sticky;top:0;z-index:200;background:#343131;color:#fff;padding:10px 14px;align-items:center;gap:12px}
+.topbar button{background:none;border:1px solid rgba(255,255,255,.35);color:#fff;border-radius:4px;width:34px;height:34px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
+.topbar .t-title{font-size:14px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* ---------- content ---------- */
+.content{margin-left:300px;min-height:100vh}
+.content-inner{max-width:880px;padding:30px 44px 64px;margin:0 auto}
+.breadcrumbs{font-size:13px;color:#999;margin-bottom:20px}
+.breadcrumbs a{color:#2980b9;text-decoration:none}
+.breadcrumbs a:hover{text-decoration:underline}
+article h1{font-size:27px;line-height:1.35;margin:0 0 8px;color:#404040;font-weight:700}
+article h2{font-size:21px;margin:36px 0 12px;padding-bottom:6px;border-bottom:1px solid #eaecef;color:#404040;line-height:1.4;font-weight:700}
+article h3{font-size:16.5px;margin:26px 0 8px;color:#404040;font-weight:700}
+article h4{font-size:15px;margin:20px 0 6px;color:#404040;font-weight:700}
+article p{margin:10px 0}
+article a{color:#2980b9;text-decoration:none}
+article a:hover{text-decoration:underline}
+/* ---------- on-page TOC ---------- */
+.toc{background:#f8f8f8;border:1px solid #e1e4e5;border-radius:4px;padding:12px 18px;margin:22px 0 8px}
+.toc-title{font-weight:700;margin:0 0 6px;font-size:14px;color:#404040}
+.toc ul{list-style:none;margin:0;padding:0}
+.toc li{margin:2px 0}
+.toc a{color:#2980b9;text-decoration:none;font-size:14px}
+.toc a:hover{text-decoration:underline}
+/* ---------- code ---------- */
+code{font-family:"Cascadia Code",Consolas,"Courier New",monospace;background:#f9f2f4;color:#c7254e;border-radius:3px;padding:1px 5px;font-size:13px}
+pre{margin:14px 0}
+.highlight{background:#f6f8fa!important;border:1px solid #e1e4e5;border-radius:4px;overflow-x:auto}
+.highlight pre{padding:13px 16px;margin:0;background:transparent;font-size:13px;line-height:1.6;white-space:pre}
+.highlight code{background:transparent;color:inherit;padding:0}
+/* ---------- tables ---------- */
+.table-wrap{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:14px;margin:0}
+th,td{border:1px solid #e1e4e5;padding:6px 12px;text-align:left;vertical-align:top;word-break:normal}
+th{background:#f0f2f5;font-weight:600}
+/* ---------- notes ---------- */
+blockquote{margin:14px 0;padding:10px 16px;background:#e7f2fa;border-left:3px solid #6ab0de;color:#2c5775}
+blockquote p{margin:4px 0}
+blockquote code{background:rgba(255,255,255,.75)}
+/* ---------- lists / misc ---------- */
+article ul,article ol{padding-left:26px;margin:10px 0}
+article li{margin:3px 0}
+hr{border:none;border-top:1px solid #e1e4e5;margin:26px 0}
+article img{max-width:100%}
+/* ---------- prev / next ---------- */
+.prevnext{display:flex;justify-content:space-between;gap:16px;margin-top:46px;padding-top:16px;border-top:1px solid #e1e4e5;font-size:14px}
+.prevnext .muted{color:#999;font-size:12px;display:block;margin-bottom:2px}
+.prevnext a{color:#2980b9;text-decoration:none}
+.prevnext a:hover{text-decoration:underline}
+/* ---------- footer ---------- */
+.footer{margin-top:24px;padding-top:14px;border-top:1px solid #e1e4e5;color:#999;font-size:12.5px}
+/* ---------- responsive ---------- */
+@media (max-width:959px){
+  .sidebar{transform:translateX(-100%)}
+  .content{margin-left:0}
+  .topbar{display:flex}
+  body.nav-open .sidebar{transform:translateX(0);box-shadow:0 0 24px rgba(0,0,0,.25)}
+  .content-inner{padding:20px 18px 48px}
+}
+@media print{.sidebar,.topbar{display:none!important}.content{margin-left:0}}
+
+</style>
+</head>
+<body>
+<nav class="sidebar" id="sidebar" aria-label="文档导航">
+<div class="sidebar-head"><a class="brand" href="index.html">Edge10 SDK 文档</a><span class="ver">v0.6</span></div><div class="sidebar-scroll"><p class="caption">文档指南</p><ul><li><a href="index.html">索引</a></li><li><a href="01-intro.html">1. 简介</a></li><li><a href="02-architecture.html">2. 架构</a></li><li><a href="03-install-build.html">3. 安装与编译</a></li><li><a href="04-quickstart.html">4. 快速上手</a></li><li><a href="05-vpc-preprocess.html">5. VPC 预处理</a></li><li><a href="06-codec.html">6. 硬件编解码</a></li><li><a href="07-rc-inference.html">7. RC 推理</a></li><li><a href="08-ep-inference.html">8. EP 推理</a></li><li><a href="09-dual-card.html">9. 双卡并行</a></li><li><a href="10-kcf-tracking.html">10. KCF 目标跟踪</a></li><li><a href="11-end-to-end-pipeline.html">11. 端到端 Pipeline</a></li><li><a href="12-multi-process.html">12. 多路与跨进程</a></li><li><a class="active" href="13-troubleshooting.html">13. 故障排查</a></li></ul><p class="caption">C API 参考</p><ul><li><a href="api/index.html">API 总览</a></li><li><a href="api/types.html">公共类型与错误码</a></li><li><a href="api/core.html">运行时</a></li><li><a href="api/device.html">设备</a></li><li><a href="api/memory.html">内存</a></li><li><a href="api/model.html">模型与推理</a></li><li><a href="api/executor.html">执行器</a></li><li><a href="api/vpc.html">VPC</a></li><li><a href="api/codec.html">编解码</a></li><li><a href="api/track.html">跟踪</a></li></ul></div>
+</nav>
+<div class="topbar">
+<button id="nav-toggle" aria-label="切换导航"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
+<span class="t-title">Edge10 SDK 文档</span>
+</div>
+<main class="content">
+<div class="content-inner">
+<div class="breadcrumbs"><a href="index.html">文档</a> » 13. 故障排查</div>
+<article>
+<h1 id="故障排查">13. 故障排查</h1><div class="toc"><p class="toc-title">目录</p><ul><li><a href="#1-错误码速查">13.1 错误码速查</a></li><li><a href="#2-vnet-数据面不激活dengine-v1170-已知问题">13.2 vnet 数据面不激活（DEngine v1.17.0 已知问题）</a></li><li><a href="#3-ep-程序一启动就报打不开-devipcm0">13.3 EP 程序一启动就报打不开 /dev/ipcm0</a></li><li><a href="#4-rc-二进制一启动就崩-走了-ep-初始化">13.4 RC 二进制一启动就崩 / 走了 EP 初始化</a></li><li><a href="#5-vdec-解不出帧-一直阻塞">13.5 VDEC 解不出帧 / 一直阻塞</a></li><li><a href="#6-结果与离线模型对不上-top-5-偏了">13.6 结果与离线模型对不上 / Top-5 偏了</a></li><li><a href="#7-性能上不去">13.7 性能上不去</a></li><li><a href="#8-日志">13.8 日志</a></li></ul></div>
+<h2 id="1-错误码速查"><span class="sec-no">13.1</span> 错误码速查</h2>
+<p>所有 API 返回 <code>Edge10Error</code>，用 <code>Edge10GetErrorString(err)</code> 转字符串。</p>
+<div class="table-wrap"><table>
+<thead>
+<tr>
+<th>错误码</th>
+<th>宏</th>
+<th>含义 / 排查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td><code>EDGE10_SUCCESS</code></td>
+<td>成功</td>
+</tr>
+<tr>
+<td>100000</td>
+<td><code>EDGE10_ERR_INVALID_PARAM</code></td>
+<td>入参为 NULL / 尺寸不对 / enum 越界</td>
+</tr>
+<tr>
+<td>100001</td>
+<td><code>EDGE10_ERR_UNINITIALIZE</code></td>
+<td>没调 <code>Edge10Init</code> 就用了</td>
+</tr>
+<tr>
+<td>100002</td>
+<td><code>EDGE10_ERR_REPEAT_INIT</code></td>
+<td>重复 <code>Edge10Init</code>；一个进程只允许一次</td>
+</tr>
+<tr>
+<td>100003</td>
+<td><code>EDGE10_ERR_INVALID_FILE</code></td>
+<td>模型文件打不开 / 不是 <code>.ty</code></td>
+</tr>
+<tr>
+<td>100013</td>
+<td><code>EDGE10_ERR_PARSE_MODEL</code></td>
+<td>模型损坏或与固件版本不匹配（见 <code>VERSION_MATRIX.md</code>）</td>
+</tr>
+<tr>
+<td>100047</td>
+<td><code>EDGE10_ERR_HOST_APL_TIMEOUT</code></td>
+<td>EP 侧 RPC 超时，查 PCIe 链路 / EP 进程是否起来</td>
+</tr>
+<tr>
+<td>100052</td>
+<td><code>EDGE10_ERR_RPC_TIMEOUT</code></td>
+<td>同上，加重试或查 EP 负载</td>
+</tr>
+<tr>
+<td>200000</td>
+<td><code>EDGE10_ERR_BAD_ALLOC</code></td>
+<td>设备显存不足；减小 batch / 分辨率</td>
+</tr>
+<tr>
+<td>200002</td>
+<td><code>EDGE10_ERR_INVALID_DEVICE</code></td>
+<td><code>device_id</code> 不存在；先 <code>Edge10GetRemoteDeviceCount</code></td>
+</tr>
+<tr>
+<td>500004</td>
+<td><code>EDGE10_ERR_DRV_FAILURE</code></td>
+<td>驱动层错误，看 <code>dmesg</code></td>
+</tr>
+<tr>
+<td>500007</td>
+<td><code>EDGE10_ERR_FILE_NOT_EXIST</code></td>
+<td>路径不对</td>
+</tr>
+<tr>
+<td>500008</td>
+<td><code>EDGE10_ERR_FILE_PERM_DENIED</code></td>
+<td>没权限；EP 包装器需要 root</td>
+</tr>
+<tr>
+<td>600001</td>
+<td><code>EDGE10_ERR_DEVICE_NOT_FOUND</code></td>
+<td>没枚举到设备；跑 <code>edge10-smi</code> 看链路</td>
+</tr>
+<tr>
+<td>600002</td>
+<td><code>EDGE10_ERR_PCIE_LINK_DOWN</code></td>
+<td>PCIe 链路掉了；<code>Edge10GetPcieLinkInfo</code> 看 <code>online</code></td>
+</tr>
+<tr>
+<td>600003</td>
+<td><code>EDGE10_ERR_EP_NOT_READY</code></td>
+<td>EP 侧 server 没起；跑 <code>tyepctl start</code></td>
+</tr>
+<tr>
+<td>600004</td>
+<td><code>EDGE10_ERR_MODEL_MISMATCH</code></td>
+<td>模型版本与 SDK / DEngine 不匹配</td>
+</tr>
+<tr>
+<td>600005</td>
+<td><code>EDGE10_ERR_VNET_NOT_ACTIVE</code></td>
+<td>见下文“vnet 不激活”</td>
+</tr>
+<tr>
+<td>600006</td>
+<td><code>EDGE10_ERR_NOT_IMPLEMENTED</code></td>
+<td>当前模式未实现</td>
+</tr>
+<tr>
+<td>600007</td>
+<td><code>EDGE10_ERR_BUF_EMPTY</code></td>
+<td>非阻塞取帧时暂无数据（<strong>不是错误</strong>，正常分支）</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="2-vnet-数据面不激活dengine-v1170-已知问题"><span class="sec-no">13.2</span> vnet 数据面不激活（DEngine v1.17.0 已知问题）</h2>
+<p>影响：<code>DE_RPC_CHN_SOCKET</code>、<code>DATA_COPY_NET</code> 走 Socket / NET 通道时不通。</p>
+<p><strong>SDK 默认走 IPCM / PCIe-SHM，不受影响</strong>，业务代码不需要做任何事。</p>
+<p>只有你自己要走 Socket 通道时才需要激活：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># EP 侧</span>
+ifconfig<span class="w"> </span>net_ipcm0<span class="w"> </span><span class="m">10</span>.1.0.100<span class="w"> </span>netmask<span class="w"> </span><span class="m">255</span>.0.0.0<span class="w"> </span>up
+<span class="c1"># Host 侧</span>
+ifconfig<span class="w"> </span>host_net_ipcm0<span class="w"> </span><span class="m">10</span>.1.0.3<span class="w"> </span>netmask<span class="w"> </span><span class="m">255</span>.0.0.0<span class="w"> </span>up
+</code></pre></div>
+
+<h2 id="3-ep-程序一启动就报打不开-devipcm0"><span class="sec-no">13.3</span> EP 程序一启动就报打不开 <code>/dev/ipcm0</code></h2>
+<p>这是因为没走 mount namespace 包装器。<strong>不要</strong>直接执行 <code>*_ep</code> 二进制：</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># 错误</span>
+./samples/bin/ep/flow_infer_ep<span class="w"> </span>model.ty
+
+<span class="c1"># 正确</span>
+edge10<span class="w"> </span>--ep<span class="w"> </span>flow_infer_ep<span class="w"> </span>-m<span class="w"> </span>model.ty
+<span class="c1"># 或</span>
+Edge10-ep-run<span class="w"> </span>./samples/bin/ep/flow_infer_ep<span class="w"> </span>model.ty
+</code></pre></div>
+
+<p>确认 <code>/dev/host_ipcm0</code> 和 <code>/dev/host_notifier_userdev</code> 存在；不存在就先：</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>start<span class="w"> </span>edge10pcie-hostdrv
+ls<span class="w"> </span>-l<span class="w"> </span>/dev/host_ipcm0<span class="w"> </span>/dev/host_notifier_userdev
+</code></pre></div>
+
+<h2 id="4-rc-二进制一启动就崩-走了-ep-初始化"><span class="sec-no">13.4</span> RC 二进制一启动就崩 / 走了 EP 初始化</h2>
+<p>说明环境里残留了 <code>EDGE10_SDK_CONFIG</code> 或 <code>DEVPROP_INI</code>。RC 进程必须在干净环境下跑：</p>
+<div class="highlight"><pre><span></span><code>env<span class="w"> </span>-i<span class="w"> </span><span class="nv">HOME</span><span class="o">=</span><span class="nv">$HOME</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span>/usr/bin:/bin<span class="w"> </span>bash<span class="w"> </span>-lc<span class="w"> </span><span class="s1">'</span>
+<span class="s1">    source /opt/edge10-sdk/env.sh</span>
+<span class="s1">    edge10 --rc flow_infer_rc -m model.ty</span>
+<span class="s1">'</span>
+</code></pre></div>
+
+<p>或者直接用 <code>edge10 --rc ...</code>，它会在 <code>run_rc()</code> 里主动 <code>unset</code> 这两个变量。</p>
+<h2 id="5-vdec-解不出帧-一直阻塞"><span class="sec-no">13.5</span> VDEC 解不出帧 / 一直阻塞</h2>
+<ul>
+<li><strong>没调 <code>Flush</code></strong>：短码流（如单张 JPEG、几帧测试片段）送完码流后必须调<code>Edge10VdecFlush(dec)</code>，驱动才会把缓存帧吐出来。</li>
+<li><strong><code>payload_type</code> 不对</strong>：JPEG=26，H.264=96，H.265=265。</li>
+<li><strong>宽高没传对</strong>：VDEC 需要在 create 时就知道最大分辨率，H.26x 序列里的SPS 与传入 <code>width/height</code> 不一致会直接失败。</li>
+<li><strong>忘了 <code>ReleaseFrame</code></strong>：连续取帧会很快耗尽内部帧池，后续 <code>GetFrame*</code>永远阻塞。</li>
+</ul>
+<h2 id="6-结果与离线模型对不上-top-5-偏了"><span class="sec-no">13.6</span> 结果与离线模型对不上 / Top-5 偏了</h2>
+<ul>
+<li>确认预处理与模型要求一致：输入尺寸、归一化、RGB/BGR 顺序、是否减均值。SDK 不做归一化，只负责把 NV12 → RGB planar 搬到 224x224。</li>
+<li>确认用的模型 <code>.ty</code> 与 <code>VERSION_MATRIX.md</code> 里的 DEngine 版本匹配。</li>
+<li>EP 与 RC 结果应当逐位对齐；如果不一致，先确认两边加载的是同一个<code>.ty</code> 文件（EP 模式下模型要在 EP 文件系统上可见，或用文件传输接口传过去）。</li>
+</ul>
+<h2 id="7-性能上不去"><span class="sec-no">13.7</span> 性能上不去</h2>
+<ul>
+<li>第一帧通常包含模型加载 / 图编译，做几次 warmup 再计时。</li>
+<li>推理路径上不要 H2D / D2H：用 <code>ExecutorGetContext</code> 让 VPC 直写输入，用 <code>Infer(exec, NULL, out)</code>。</li>
+<li>单进程多路用 <code>InferAsync</code> 把准备工作与推理重叠。</li>
+<li>想要满吞吐就上 <code>--rc-ep</code> 两进程，见 <a href="09-dual-card.html">09_双卡并行</a>。</li>
+</ul>
+<h2 id="8-日志"><span class="sec-no">13.8</span> 日志</h2>
+<div class="highlight"><pre><span></span><code><span class="n">Edge10SetLogLevel</span><span class="p">(</span><span class="n">EDGE10_LOG_DEBUG</span><span class="p">);</span><span class="w">   </span><span class="cm">/* 0=DEBUG 1=INFO 2=WARN 3=ERROR */</span>
+</code></pre></div>
+
+<p>排障时把日志级别调到 <code>DEBUG</code>，能看到 DCL 调用细节。</p>
+</article>
+<div class="prevnext"><div class="pn-prev"><span class="muted">← 上一页</span><a href="12-multi-process.html">12. 多路与跨进程</a></div><div class="pn-next"><span class="muted">下一页 →</span><a href="api/index.html">API 总览</a></div></div>
+</div>
+</main>
+<script>
+(function(){
+var body=document.body,tg=document.getElementById("nav-toggle");
+if(tg){tg.addEventListener("click",function(){body.classList.toggle("nav-open");});}
+var links=document.querySelectorAll(".sidebar a");
+for(var i=0;i<links.length;i++){links[i].addEventListener("click",function(){if(window.innerWidth<960){body.classList.remove("nav-open");}});}
+})();
+</script>
+</body>
+</html>
