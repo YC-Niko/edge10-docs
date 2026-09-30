@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="generator" content="Edge10 SDK docs builder">
-<title>索引 — Edge10 SDK 文档</title>
+<title>API 总览 — Edge10 SDK 文档</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23343131'/%3E%3Ctext x='32' y='45' font-size='38' font-weight='bold' text-anchor='middle' fill='%232980b9' font-family='Arial'%3EE%3C/text%3E%3C/svg%3E">
 <style>
 pre { line-height: 125%; }
@@ -156,7 +156,7 @@ article img{max-width:100%}
 </head>
 <body>
 <nav class="sidebar" id="sidebar" aria-label="文档导航">
-<div class="sidebar-head"><a class="brand" href="index.html">Edge10 SDK 文档</a><span class="ver">v0.6</span></div><div class="sidebar-scroll"><p class="caption">文档指南</p><ul><li><a class="active" href="index.html">索引</a></li><li><a href="01-intro.html">1. 简介</a></li><li><a href="02-architecture.html">2. 架构</a></li><li><a href="03-install-build.html">3. 安装与编译</a></li><li><a href="04-quickstart.html">4. 快速上手</a></li><li><a href="05-vpc-preprocess.html">5. VPC 预处理</a></li><li><a href="06-codec.html">6. 硬件编解码</a></li><li><a href="07-rc-inference.html">7. RC 推理</a></li><li><a href="08-ep-inference.html">8. EP 推理</a></li><li><a href="09-dual-card.html">9. 双卡并行</a></li><li><a href="10-kcf-tracking.html">10. KCF 目标跟踪</a></li><li><a href="11-end-to-end-pipeline.html">11. 端到端 Pipeline</a></li><li><a href="12-multi-process.html">12. 多路与跨进程</a></li><li><a href="13-troubleshooting.html">13. 故障排查</a></li></ul><p class="caption">C API 参考</p><ul><li><a href="api/index.html">API 总览</a></li><li><a href="api/types.html">公共类型与错误码</a></li><li><a href="api/core.html">运行时</a></li><li><a href="api/device.html">设备</a></li><li><a href="api/memory.html">内存</a></li><li><a href="api/model.html">模型与推理</a></li><li><a href="api/executor.html">执行器</a></li><li><a href="api/vpc.html">VPC</a></li><li><a href="api/codec.html">编解码</a></li><li><a href="api/track.html">跟踪</a></li></ul></div>
+<div class="sidebar-head"><a class="brand" href="../index.html">Edge10 SDK 文档</a><span class="ver">v0.6</span></div><div class="sidebar-scroll"><p class="caption">文档指南</p><ul><li><a href="../index.html">索引</a></li><li><a href="../01-intro.html">1. 简介</a></li><li><a href="../02-architecture.html">2. 架构</a></li><li><a href="../03-install-build.html">3. 安装与编译</a></li><li><a href="../04-quickstart.html">4. 快速上手</a></li><li><a href="../05-vpc-preprocess.html">5. VPC 预处理</a></li><li><a href="../06-codec.html">6. 硬件编解码</a></li><li><a href="../07-rc-inference.html">7. RC 推理</a></li><li><a href="../08-ep-inference.html">8. EP 推理</a></li><li><a href="../09-dual-card.html">9. 双卡并行</a></li><li><a href="../10-kcf-tracking.html">10. KCF 目标跟踪</a></li><li><a href="../11-end-to-end-pipeline.html">11. 端到端 Pipeline</a></li><li><a href="../12-multi-process.html">12. 多路与跨进程</a></li><li><a href="../13-troubleshooting.html">13. 故障排查</a></li></ul><p class="caption">C API 参考</p><ul><li><a class="active" href="index.html">API 总览</a></li><li><a href="types.html">公共类型与错误码</a></li><li><a href="core.html">运行时</a></li><li><a href="device.html">设备</a></li><li><a href="memory.html">内存</a></li><li><a href="model.html">模型与推理</a></li><li><a href="executor.html">执行器</a></li><li><a href="vpc.html">VPC</a></li><li><a href="codec.html">编解码</a></li><li><a href="track.html">跟踪</a></li></ul></div>
 </nav>
 <div class="topbar">
 <button id="nav-toggle" aria-label="切换导航"><svg width="18" height="14" viewBox="0 0 18 14"><path d="M0 1h18M0 7h18M0 13h18" stroke="currentColor" stroke-width="2" fill="none"/></svg></button>
@@ -164,130 +164,81 @@ article img{max-width:100%}
 </div>
 <main class="content">
 <div class="content-inner">
-<div class="breadcrumbs">文档</div>
+<div class="breadcrumbs"><a href="../index.html">文档</a> » <a href="index.html">C API 参考</a> » API 总览</div>
 <article>
-<h1 id="edge10-sdk-文档">Edge10 SDK 文档</h1><div class="toc"><p class="toc-title">目录</p><ul><li><a href="#目录">目录</a></li><li><a href="#语言绑定">语言绑定</a></li><li><a href="#快速入口">快速入口</a></li><li><a href="#常用命令">常用命令</a></li><li><a href="#版本">版本</a></li></ul></div>
-<p>面向 <strong>Edge10 / XJ-A300 算力卡</strong>的 C99 SDK 文档。</p>
+<h1 id="edge10-sdk-api-参考">Edge10 SDK API 参考</h1><div class="toc"><p class="toc-title">目录</p><ul><li><a href="#目录">目录</a></li><li><a href="#通用约定">通用约定</a></li></ul></div>
+<blockquote>
+<p>已对齐 SDK v0.6。所有函数均为 C99、<code>extern "C"</code>，声明在 <code>include/Edge10/</code> 下。
+推荐统一 <code>#include "Edge10/Edge10_all.h"</code>。</p>
+</blockquote>
 <h2 id="目录">目录</h2>
 <div class="table-wrap"><table>
 <thead>
 <tr>
+<th>模块</th>
+<th>头文件</th>
 <th>文档</th>
-<th>内容</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><a href="01-intro.html">01_简介</a></td>
-<td>SDK 简介、支持场景、性能参考</td>
+<td>公共类型 / 枚举 / 错误码</td>
+<td><code>Edge10_types.h</code>、<code>Edge10_error.h</code></td>
+<td><a href="types.html">types</a></td>
 </tr>
 <tr>
-<td><a href="02-architecture.html">02_架构</a></td>
-<td>整体架构、双目标编译、目录结构</td>
+<td>运行时（Init / Version / Log）</td>
+<td><code>Edge10.h</code></td>
+<td><a href="core.html">core</a></td>
 </tr>
 <tr>
-<td><a href="03-install-build.html">03_安装与编译</a></td>
-<td>安装驱动、编译 SDK、加载环境变量</td>
+<td>设备</td>
+<td><code>Edge10_device.h</code></td>
+<td><a href="device.html">device</a></td>
 </tr>
 <tr>
-<td><a href="04-quickstart.html">04_快速上手</a></td>
-<td>5 行最小流程、完整示例、运行命令</td>
+<td>内存</td>
+<td><code>Edge10_memory.h</code></td>
+<td><a href="memory.html">memory</a></td>
 </tr>
 <tr>
-<td><a href="05-vpc-preprocess.html">05_VPC预处理</a></td>
-<td>VPC 硬件图像预处理（resize / crop / cvtcolor）</td>
+<td>模型 / 推理</td>
+<td><code>Edge10_model.h</code></td>
+<td><a href="model.html">model</a></td>
 </tr>
 <tr>
-<td><a href="06-codec.html">06_硬件编解码</a></td>
-<td>VDEC / VENC 硬件编解码（JPEG / H.264 / H.265）</td>
+<td>执行器（高层封装，推荐）</td>
+<td><code>Edge10_executor.h</code></td>
+<td><a href="executor.html">executor</a></td>
 </tr>
 <tr>
-<td><a href="07-rc-inference.html">07_RC推理</a></td>
-<td>RC 本地推理</td>
+<td>VPC</td>
+<td><code>Edge10_vpc.h</code></td>
+<td><a href="vpc.html">vpc</a></td>
 </tr>
 <tr>
-<td><a href="08-ep-inference.html">08_EP推理</a></td>
-<td>EP（PCIe 远程）推理</td>
+<td>编解码</td>
+<td><code>Edge10_codec.h</code></td>
+<td><a href="codec.html">codec</a></td>
 </tr>
 <tr>
-<td><a href="09-dual-card.html">09_双卡并行</a></td>
-<td>RC + EP 两卡并行（含任务队列模式）</td>
-</tr>
-<tr>
-<td><a href="10-kcf-tracking.html">10_KCF目标跟踪</a></td>
-<td>KCF 单 / 多目标跟踪</td>
-</tr>
-<tr>
-<td><a href="11-end-to-end-pipeline.html">11_端到端Pipeline</a></td>
-<td>端到端 pipeline（JPEG/H.26x → 推理）</td>
-</tr>
-<tr>
-<td><a href="12-multi-process.html">12_多路与跨进程</a></td>
-<td>同进程多路 / 跨进程协作</td>
-</tr>
-<tr>
-<td><a href="13-troubleshooting.html">13_故障排查</a></td>
-<td>错误码速查、故障排查</td>
-</tr>
-<tr>
-<td><a href="api/index.html">api/</a></td>
-<td>C API 逐函数参考</td>
+<td>跟踪</td>
+<td><code>Edge10_track.h</code></td>
+<td><a href="track.html">track</a></td>
 </tr>
 </tbody>
 </table></div>
-<h2 id="语言绑定">语言绑定</h2>
-<div class="table-wrap"><table>
-<thead>
-<tr>
-<th>文档</th>
-<th>内容</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><a href="../bindings/README.html">bindings/README</a></td>
-<td>绑定总览</td>
-</tr>
-<tr>
-<td><a href="../bindings/cpp/README.html">bindings/cpp/README</a></td>
-<td>C++ 集成（直接 include SDK 头文件）</td>
-</tr>
-<tr>
-<td><a href="../bindings/python/README.html">bindings/python/README</a></td>
-<td>Python 调用（subprocess / ctypes）</td>
-</tr>
-</tbody>
-</table></div>
-<h2 id="快速入口">快速入口</h2>
-<p><strong>用户只有两个命令</strong>：</p>
-<div class="highlight"><pre><span></span><code>edge10<span class="w">          </span><span class="c1"># 所有业务命令（推理 / 编解码 / 跟踪 / 批处理）</span>
-edge10-smi<span class="w">      </span><span class="c1"># 设备监控</span>
-</code></pre></div>
-
-<h2 id="常用命令">常用命令</h2>
-<div class="highlight"><pre><span></span><code><span class="c1"># 单张图片分类（RC）</span>
-edge10<span class="w"> </span>--rc<span class="w"> </span>flow_classify_rc<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-i<span class="w"> </span>picture/1920x1080.jpg<span class="w"> </span>-o<span class="w"> </span>output/classify.jpg<span class="w"> </span>-w<span class="w"> </span><span class="m">1920</span><span class="w"> </span>-h<span class="w"> </span><span class="m">1080</span>
-
-<span class="c1"># 多张图片并行（RC + EP 任务队列）</span>
-edge10<span class="w"> </span>--rc-ep<span class="w"> </span>flow_classify_ep<span class="w"> </span>-m<span class="w"> </span>models/onnx_resnet50.ty<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-i<span class="w"> </span><span class="s2">"picture/batch/*.jpg"</span><span class="w"> </span>-o<span class="w"> </span>output/batch/<span class="w"> </span>-w<span class="w"> </span><span class="m">1920</span><span class="w"> </span>-h<span class="w"> </span><span class="m">1080</span>
-
-<span class="c1"># 视频转码（H.265 → H.264）</span>
-edge10<span class="w"> </span>--rc<span class="w"> </span>flow_video_codec_rc<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-i<span class="w"> </span>video/test.mp4<span class="w"> </span>-o<span class="w"> </span>output/vc<span class="w"> </span>--ptype<span class="w"> </span><span class="m">265</span><span class="w"> </span>--ptype-out<span class="w"> </span><span class="m">96</span><span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-w<span class="w"> </span><span class="m">960</span><span class="w"> </span>-h<span class="w"> </span><span class="m">544</span>
-
-<span class="c1"># 视频检测 + 跟踪 + 编码（YOLO + KCF）</span>
-edge10<span class="w"> </span>--rc<span class="w"> </span>flow_video_track_detect_rc<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-i<span class="w"> </span>video/test.mp4<span class="w"> </span>-o<span class="w"> </span>output/tracked.h264<span class="w"> </span><span class="se">\</span>
-<span class="w">    </span>-m<span class="w"> </span>models/onnx_yolov5s.ty<span class="w"> </span>-w<span class="w"> </span><span class="m">960</span><span class="w"> </span>-h<span class="w"> </span><span class="m">544</span>
-</code></pre></div>
-
-<h2 id="版本">版本</h2>
-<p>当前文档已对齐 <strong>SDK v0.6</strong>（含任务队列、硬件 JPEG 输出等特性）。</p>
+<h2 id="通用约定">通用约定</h2>
+<ul>
+<li>所有函数返回 <code>Edge10Error</code>，<code>0 == EDGE10_SUCCESS</code>。</li>
+<li>“创建”类函数输出二级指针；失败时输出参数保持未初始化，不要解引用。</li>
+<li>“Destroy / Free / Unload”类函数接受 <code>NULL</code> 是安全的（幂等）。</li>
+<li><code>device_id</code>：<code>0</code> = 第一张卡；<code>-1</code> = Host 内存（仅 <code>TensorCreate</code> /<code>MallocHost</code> 语义）。</li>
+<li>多线程：<code>Edge10Executor</code> / <code>Edge10Vdec</code> / <code>Edge10Track</code> 句柄<strong>不是</strong>线程安全的，
+  要么一一线程一句柄，要么外部加锁。</li>
+</ul>
 </article>
-<div class="prevnext"><div class="pn-prev"></div><div class="pn-next"><span class="muted">下一页 →</span><a href="01-intro.html">1. 简介</a></div></div>
+<div class="prevnext"><div class="pn-prev"><span class="muted">← 上一页</span><a href="../13-troubleshooting.html">13. 故障排查</a></div><div class="pn-next"><span class="muted">下一页 →</span><a href="types.html">公共类型与错误码</a></div></div>
 </div>
 </main>
 <script>
